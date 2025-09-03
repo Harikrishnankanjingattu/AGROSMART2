@@ -1,333 +1,116 @@
-AgroSmart Prototype 1 - Water Sprinkler System
-Project Overview
-AgroSmart Prototype 1 is an Arduino-based water sprinkler control system with an OLED display interface. The system provides three main modes of operation for automated plant watering with configurable timing options, designed for efficient agricultural water management.
+Smart Water Sprinkler System
+This project is an Arduino-based smart water sprinkler system with a user interface on an OLED screen. It allows you to control a water sprinkler (represented by an LED) using a rotary potentiometer for navigation and push buttons for selection. The system features three main modes: Auto Spray, Eco Mode, and Shutdown.
 
-Features & Functions
-1. Auto Spray Mode
-Set custom wait time (1-30 minutes)
+⚙️ Features
+OLED Display: A 128x32 pixel OLED screen (SSD1306) shows the menu, settings, and status messages.
 
-Set custom spray duration (1-30 minutes)
+Menu-Driven Interface: Navigate through different modes using a rotary potentiometer.
 
-Fully automated operation after configuration
+User Controls:
 
-2. Eco Mode
-Automatic spraying every 10 minutes
+Potentiometer: Used to scroll through menu options and adjust settings (e.g., wait and spray times).
 
-Short 1-minute spray duration to conserve water
+SELECT button: Enters a submenu or confirms a setting.
 
-Energy-efficient operation
+BACK button: Returns to the main menu from a submenu.
 
-3. Shutdown Mode
-Completely disables the system
+Audio Feedback: A buzzer provides distinct tones for button presses and operational status changes.
 
-Safe power-down state
+Operating Modes:
 
-Easy reactivation
+Auto Spray: Set a custom wait time and a custom spray duration in minutes. The system will wait, then spray for the specified time, and finally return to the main menu.
 
-Hardware Interface
-OLED Display: 128x32 pixel screen for menu navigation
+Eco Mode: Automatically sprays water for 1 minute every 10 minutes. This mode continues to run in the background until the BACK button is pressed.
 
-Potentiometer: For menu selection and value adjustment
+Shutdown: Deactivates all sprinkling functions and turns off the LED. The system remains in this state until the BACK button is pressed.
 
-Two Control Buttons: Select and Back navigation
+🛠️ Components
+Arduino Board: (e.g., Arduino Uno, Nano)
 
-LED Indicator: Visual feedback during spraying
+OLED Display: Adafruit SSD1306 (128x32 I2C)
 
-Buzzer: Audible feedback for user interactions
+Potentiometer: A simple rotary potentiometer for input.
 
-Advantages
-Water Conservation: Eco mode minimizes water usage with optimized intervals
+Push Buttons: Two push buttons, one for SELECT and one for BACK.
 
-User-Friendly: Intuitive menu system with visual and audio feedback
+Buzzer: A passive or active buzzer for audio feedback.
 
-Flexible Configuration: Customizable timing for different plant needs
+LED: An LED to simulate the water sprinkler or pump.
 
-Energy Efficient: Low-power design suitable for battery operation
+Jumper Wires and Breadboard: To connect all the components.
 
-Safety Features: Dedicated shutdown mode and fail-safes
+🔌 Wiring Diagram
+Connect the components to the Arduino as follows:
 
-Code Structure
-text
-main/
-├── setup() - Initializes hardware and display
-├── loop() - Main program loop
-├── showMainMenu() - Displays main menu
-├── handleMenuNavigation() - Processes user input
-├── handleSubMenu() - Manages submenu operations
-├── autoSprayMenu() - Handles auto spray configuration
-├── ecoModeMenu() - Manages eco mode
-├── shutdownMenu() - Handles shutdown mode
-├── sprayWater() - Controls watering process
-└── beep() - Audio feedback function
-Prototype 1 Components
-Arduino UNO
+Component	Pin	Description
+OLED Display	SCL, SDA	Connect to Arduino's I2C pins (A5, A4 on Uno)
+Potentiometer	A0	Analog input for menu navigation and value setting
+LED	4	Digital output for the "sprinkler"
+SELECT Button	5	Digital input with internal pull-up
+BACK Button	6	Digital input with internal pull-up
+Buzzer	7	Digital output for tones
 
-SSD1306 OLED Display (128x32)
+Export to Sheets
+💻 How to Use
+Upload the Code: Connect your Arduino board to your computer and upload the provided code using the Arduino IDE.
 
-Potentiometer for input
+Power On: Once powered on, the OLED screen will display "Water Sprinkler" and "Starting...".
 
-LED indicator
+Main Menu: The system will then show the main menu with Auto Spray, Eco Mode, and Shutdown.
 
-Buzzer for audio feedback
+Navigation:
 
-Two push buttons
+Use the potentiometer to scroll through the options.
 
-Next Implementation Needed
-Hardware Improvements:
-Add relay module for actual water pump control
+Press the SELECT button to choose a mode.
 
-Implement moisture sensor for soil condition monitoring
+Setting Modes:
 
-Add real-time clock (RTC) for scheduled watering
+Auto Spray:
 
-Include power management circuit for battery operation
+Select Auto Spray.
 
-Add water flow sensor for usage monitoring
+Use the potentiometer to set the WAIT Time in minutes, then press SELECT.
 
-Software Enhancements:
-Implement data logging functionality
+Use the potentiometer again to set the SPRAY Time in minutes, then press SELECT.
 
-Add preset configurations for different plant types
+The system will wait for the set duration before spraying, then return to the main menu.
 
-Develop mobile app connectivity via Bluetooth/Wi-Fi
+Eco Mode:
 
-Create watering history tracking
+Select Eco Mode.
 
-Add low water level detection safety feature
-Additional Features:
-Multiple zone support for different garden areas
-Weather-based watering adjustment (with external data)
-Water usage statistics and reporting
-Remote control capabilities
-Solar charging compatibility
-Setup Instructions
-Connect hardware components as specified in the schematic
-Upload the provided code to Arduino UNO
-Adjust potentiometer to navigate menus
-code:-
-#include <Wire.h>
-#include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
-
-#define SCREEN_WIDTH 128
-#define SCREEN_HEIGHT 32
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
-
-// Pins
-#define POT_PIN A0
-#define LED_PIN 4
-#define SELECT_BTN 5
-#define BACK_BTN 6
-#define BUZZER_PIN 7
-
-String menuItems[] = {"Auto Spray", "Eco Mode", "Shutdown"};
-int menuIndex = 0;
-const int totalMenus = 3;
-
-bool inSubMenu = false;
-int currentMenu = -1;
-bool ecoModeActive = false;
-bool shutdownMode = false;
-
-const unsigned long ECO_INTERVAL_MS = 600000UL;
-const unsigned int ECO_SPRAY_DURATION_MIN = 1;
-unsigned long lastSprayTime = 0;
-
-// Auto Spray variables
-int waitTime = 1;
-int sprayTime = 1;
-int autoSprayStep = 0;
-
-void showMainMenu();
-void handleMenuNavigation();
-void handleSubMenu();
-void autoSprayMenu();
-void ecoModeMenu();
-void shutdownMenu();
-void sprayWater(unsigned int durationMinutes);
-void beep(unsigned int f, unsigned int d);
-
-void setup() {
-  pinMode(LED_PIN, OUTPUT);
-  pinMode(SELECT_BTN, INPUT_PULLUP);
-  pinMode(BACK_BTN, INPUT_PULLUP);
-  pinMode(BUZZER_PIN, OUTPUT);
-
-  if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
-    while (1) {}
-  }
-
-  display.clearDisplay();
-  display.setTextSize(1);
-  display.setTextColor(WHITE);
-  display.setCursor(8, 10);
-  display.println("Water Sprinkler");
-  display.setCursor(22, 20);
-  display.println("Starting...");
-  display.display();
-  delay(1200);
-}
-
-void loop() {
-  if (!inSubMenu) {
-    showMainMenu();
-    handleMenuNavigation();
-  } else {
-    handleSubMenu();
-  }
-
-  if (!shutdownMode && ecoModeActive && (millis() - lastSprayTime >= ECO_INTERVAL_MS)) {
-    sprayWater(ECO_SPRAY_DURATION_MIN);
-    lastSprayTime = millis();
-  }
-}
-
-void showMainMenu() {
-  display.clearDisplay();
-  display.setTextSize(1);
-  display.setTextColor(WHITE);
-  display.setCursor(0, 0);
-  display.println("== Mode ==");
-
-  for (int i = 0; i < totalMenus; i++) {
-    if (i == menuIndex) display.setTextColor(BLACK, WHITE);
-    else display.setTextColor(WHITE);
-    display.setCursor(0, 10 + i * 10);
-    display.println(menuItems[i]);
-  }
-  display.display();
-}
-
-void handleMenuNavigation() {
-  int potValue = analogRead(POT_PIN);
-  menuIndex = map(potValue, 0, 1023, 0, totalMenus - 1);
-
-  if (digitalRead(SELECT_BTN) == LOW) {
-    beep(1000, 120);
-    delay(200);
-    inSubMenu = true;
-    currentMenu = menuIndex;
-    autoSprayStep = 0;
-  }
-}
-
-void handleSubMenu() {
-  if (digitalRead(BACK_BTN) == LOW) {
-    beep(800, 120);
-    ecoModeActive = false;
-    shutdownMode = false;
-    inSubMenu = false;
-    delay(200);
-    return;
-  }
-
-  switch (currentMenu) {
-    case 0: autoSprayMenu(); break;
-    case 1: ecoModeMenu(); break;
-    case 2: shutdownMenu(); break;
-  }
-}
-
-void autoSprayMenu() {
-  if (autoSprayStep == 0) {
-    waitTime = map(analogRead(POT_PIN), 0, 1023, 1, 30);
-    display.clearDisplay();
-    display.setCursor(0, 0);
-    display.println("Set WAIT Time:");
-    display.setCursor(0, 12);
-    display.print(waitTime);
-    display.println(" min");
-    display.display();
-
-    if (digitalRead(SELECT_BTN) == LOW) {
-      beep(1200, 120);
-      delay(200);
-      autoSprayStep = 1;
-    }
-  } else if (autoSprayStep == 1) {
-    sprayTime = map(analogRead(POT_PIN), 0, 1023, 1, 30);
-    display.clearDisplay();
-    display.setCursor(0, 0);
-    display.println("Set SPRAY Time:");
-    display.setCursor(0, 12);
-    display.print(sprayTime);
-    display.println(" min");
-    display.display();
-
-    if (digitalRead(SELECT_BTN) == LOW) {
-      beep(1300, 120);
-      delay(200);
-      autoSprayStep = 2;
-      unsigned long waitMs = (unsigned long)waitTime * 60000UL;
-
-      display.clearDisplay();
-      display.setCursor(0, 0);
-      display.println("Waiting...");
-      display.display();
-
-      delay(waitMs);
-      sprayWater((unsigned int)sprayTime);
-      inSubMenu = false;
-    }
-  }
-}
-
-void ecoModeMenu() {
-  if (!ecoModeActive) {
-    ecoModeActive = true;
-    lastSprayTime = millis();
-    beep(900, 100);
-  }
-  display.clearDisplay();
-  display.setCursor(0, 0);
-  display.println("Eco Mode ON");
-  display.setCursor(0, 12);
-  display.println("Every 10 min");
-  display.display();
-}
-
-void shutdownMenu() {
-  shutdownMode = true;
-  ecoModeActive = false;
-  digitalWrite(LED_PIN, LOW);
-
-  display.clearDisplay();
-  display.setCursor(0, 0);
-  display.println("Shutdown Mode");
-  display.setCursor(0, 12);
-  display.println("Back=exit");
-  display.display();
-}
-
-void sprayWater(unsigned int durationMinutes) {
-  if (shutdownMode) return;
-
-  display.clearDisplay();
-  display.setCursor(0, 0);
-  display.println("Spraying...");
-  display.display();
-
-  digitalWrite(LED_PIN, HIGH);
-  beep(1500, 150);
-
-  unsigned long ms = (unsigned long)durationMinutes * 60000UL;
-  delay(ms);
-
-  digitalWrite(LED_PIN, LOW);
-  beep(600, 250);
-
-  display.clearDisplay();
-  display.setCursor(0, 0);
-  display.println("Done!");
-  display.display();
-  delay(600);
-}
-
-void beep(unsigned int f, unsigned int d) {
-  tone(BUZZER_PIN, f, d);
-}
-
-
-Use SELECT button to choose options
-
-Use BACK button to return to previous menu
+The screen will show "Eco Mode ON" and "Every 10 min".
+
+The system will now spray for 1 minute every 10 minutes until you press the BACK button.
+
+Shutdown:
+
+Select Shutdown.
+
+The screen will show "Shutdown Mode" and "Back=exit".
+
+The sprinkler function is disabled, and the LED turns off.
+
+Press the BACK button to exit and return to the main menu.
+
+💡 Code Overview
+setup(): Initializes the display, pins, and shows a brief startup message.
+
+loop(): The main function that continuously checks if the user is in the main menu or a submenu and calls the appropriate handler functions.
+
+showMainMenu(): Renders the main menu options on the OLED screen, highlighting the selected item.
+
+handleMenuNavigation(): Reads the potentiometer to update the menuIndex and checks for a press of the SELECT button to enter a submenu.
+
+handleSubMenu(): Manages the logic for each specific menu item and checks for a press of the BACK button.
+
+autoSprayMenu(): Guides the user through setting the wait and spray times using the potentiometer and SELECT button.
+
+ecoModeMenu(): Activates Eco Mode and displays the status on the screen. The main loop handles the timed spraying.
+
+shutdownMenu(): Sets the shutdownMode flag, turns off the LED, and displays the shutdown message.
+
+sprayWater(durationMinutes): A helper function that simulates spraying by turning on the LED and waits for the specified duration before turning it off.
+
+beep(f, d): A simple function to generate a tone on the buzzer with a given frequency (f) and duration (d).
