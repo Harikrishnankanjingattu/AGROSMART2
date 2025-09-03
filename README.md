@@ -1,13 +1,34 @@
-Screenshot 2025-09-01 201059.png
+# 🌱 AGROSMART  
+**Implementation of Smart Agriculture for Efficient Cultivation in Hilly Regions**  
 
-# 🌱 AGROSMART – PROTOTYPE 1  
-**Smart Water Sprinkler System**
+---
+
+## 📑 Index  
+
+1. [Prototype 1 – Smart Water Sprinkler System](#1️⃣-prototype-1--smart-water-sprinkler-system)  
+   - [📸 Project Image](#📸-project-image-1)  
+   - [📖 Project Overview](#📖-project-overview-1)  
+   - [⚙️ Features](#⚙️-features-1)  
+   - [🚀 Operating Modes](#🚀-operating-modes-1)  
+   - [🛠️ Components](#🛠️-components-1)  
+   - [🔌 Wiring Diagram](#🔌-wiring-diagram-1)  
+   - [💻 How to Use](#💻-how-to-use-1)  
+   - [💡 Code Overview](#💡-code-overview-1)  
+
+2. [Prototype 2 – Smart Agriculture with Water Monitoring & Rainwater Harvesting](#2️⃣-prototype-2--smart-agriculture-with-water-monitoring--rainwater-harvesting)  
+   - [📖 Background](#📖-background-2)  
+   - [💡 Proposed Solution](#💡-proposed-solution-2)  
+   - [🎯 Impact](#🎯-impact-2)  
+   - [📈 Conclusion](#📈-conclusion-2)  
+
+---
+
+# 1️⃣ PROTOTYPE 1 – Smart Water Sprinkler System  
 
 ---
 
 ## 📸 Project Image  
-![Project Image Placeholder](Screenshot 2025-09-01 201059.png)  
-*(Replace with actual wiring diagram or prototype photo)*  
+![AGROSMART Prototype](Screenshot%202025-09-01%20201059.png)  
 
 ---
 
@@ -99,7 +120,50 @@ The system features three main modes:
 - **ecoModeMenu()** → manages timed spraying.  
 - **shutdownMenu()** → disables sprinkler.  
 - **sprayWater(durationMinutes)** → turns LED on/off for given duration.  
-- **beep(f, d)** → generates buzzer tone.  
+- **beep(f, d)** → generates buzzer tone at a given frequency and duration.  
 
 ---
-a given frequency (f) and duration (d).
+
+# 2️⃣ PROTOTYPE 2 – Smart Agriculture with Water Monitoring & Rainwater Harvesting  
+
+---
+
+## 📖 Background  
+
+The agricultural region of **Jorethang in South Sikkim** experiences **harsh, rainless summers** and frequent **water scarcity**, making traditional irrigation unreliable and inefficient. Farmers struggle to provide adequate water to crops, often leading to **reduced yields** and **wasted resources**.  
+
+With **climate change intensifying** these issues, there is a pressing need for a **sustainable, smart irrigation approach** that maximizes water efficiency and crop productivity. Integrating **rainwater harvesting, sensor-based monitoring, and crop-specific intelligence** offers a forward-thinking solution to these regional challenges.  
+
+---
+
+## 💡 Proposed Solution  
+
+**AgroSmart: A Sensor-Based Smart Irrigation System with Crop Intelligence and Rainwater Harvesting**  
+
+The system provides affordable, automated irrigation tailored to each crop’s needs using **soil moisture and environmental sensors**. It integrates a **rainwater harvesting unit with real-time water level monitoring**, ensuring efficient water use even during dry periods.  
+
+### Solution Highlights  
+- 🌱 **Soil moisture & temperature sensors** → monitor real-time field conditions.  
+- 📊 **Crop database** → determines optimal watering levels for each crop.  
+- 🔧 **Automated valve control** → managed by microcontrollers (Arduino/ESP32).  
+- 💧 **Rainwater harvesting with level sensors** → track stored water availability.  
+- 📱 **Mobile/Web dashboard** → allows farmers to monitor data and control irrigation remotely.  
+- 🔔 **Alerts & updates** → SMS or app notifications to keep farmers informed.  
+
+---
+
+## 🎯 Impact  
+
+- 🌍 **Conserves water** → reduces wastage through precision irrigation.  
+- 🌾 **Improves crop yields** → ensures crops get the right amount of water.  
+- 🤖 **Reduces manual labour** → minimizes dependency on constant field monitoring.  
+- 🌦️ **Adaptation to climate change** → resilient system for uncertain weather.  
+- 🔄 **Self-sustaining** → integrates renewable rainwater harvesting into irrigation.  
+
+---
+
+## 📈 Conclusion  
+
+**Prototype 2** enhances the basic water sprinkler idea into a **complete smart irrigation ecosystem** tailored for hilly regions like South Sikkim. By combining **IoT-based monitoring, rainwater harvesting, and crop intelligence**, AgroSmart empowers farmers to **increase productivity sustainably** while addressing **water scarcity challenges**.  
+
+---
