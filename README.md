@@ -15,11 +15,17 @@
    - [💻 How to Use](#💻-how-to-use-1)  
    - [💡 Code Overview](#💡-code-overview-1)  
 
-2. [Prototype 2 – Smart Agriculture with Water Monitoring & Rainwater Harvesting](#2️⃣-prototype-2--smart-agriculture-with-water-monitoring--rainwater-harvesting)  
-   - [📖 Background](#📖-background-2)  
-   - [💡 Proposed Solution](#💡-proposed-solution-2)  
-   - [🎯 Impact](#🎯-impact-2)  
-   - [📈 Conclusion](#📈-conclusion-2)  
+2. [Prototype 2 – Agrivyaan: Smart Agriculture System](#2️⃣-prototype-2--agrivyaan-smart-agriculture-system)  
+   - [📸 Project Image](#📸-project-image-2)  
+   - [📖 Problem Statement](#📖-problem-statement-2)  
+   - [💡 Solution & SDGs](#💡-solution--sdgs-2)  
+   - [🔑 Key Features](#🔑-key-features-2)  
+   - [⚙️ System Functions](#⚙️-system-functions-2)  
+   - [✅ Advantages](#✅-advantages-2)  
+   - [⚠️ Drawbacks of Existing Systems](#⚠️-drawbacks-of-existing-systems-2)  
+   - [🧪 Agrivyaan Levels](#🧪-agrivyaan-levels-2)  
+   - [📈 Future Market](#📈-future-market-2)  
+   - [📌 Conclusion](#📌-conclusion-2)  
 
 ---
 
@@ -28,7 +34,7 @@
 ---
 
 ## 📸 Project Image  
-![AGROSMART Prototype](Screenshot%202025-09-01%20201059.png)  
+![AGROSMART Prototype 1](Screenshot%202025-09-01%20201059.png)  
 
 ---
 
@@ -120,50 +126,116 @@ The system features three main modes:
 - **ecoModeMenu()** → manages timed spraying.  
 - **shutdownMenu()** → disables sprinkler.  
 - **sprayWater(durationMinutes)** → turns LED on/off for given duration.  
-- **beep(f, d)** → generates buzzer tone at a given frequency and duration.  
+- **beep(f, d)** → generates buzzer tone.  
 
 ---
 
-# 2️⃣ PROTOTYPE 2 – Smart Agriculture with Water Monitoring & Rainwater Harvesting  
+# 2️⃣ PROTOTYPE 2 – Agrivyaan: Smart Agriculture System  
 
 ---
 
-## 📖 Background  
-
-The agricultural region of **Jorethang in South Sikkim** experiences **harsh, rainless summers** and frequent **water scarcity**, making traditional irrigation unreliable and inefficient. Farmers struggle to provide adequate water to crops, often leading to **reduced yields** and **wasted resources**.  
-
-With **climate change intensifying** these issues, there is a pressing need for a **sustainable, smart irrigation approach** that maximizes water efficiency and crop productivity. Integrating **rainwater harvesting, sensor-based monitoring, and crop-specific intelligence** offers a forward-thinking solution to these regional challenges.  
+## 📸 Project Image  
+![AGROSMART Prototype 2](Screenshot%202025-09-03%20191915.png)  
 
 ---
 
-## 💡 Proposed Solution  
+## 📖 Problem Statement  
 
-**AgroSmart: A Sensor-Based Smart Irrigation System with Crop Intelligence and Rainwater Harvesting**  
+Traditional farming suffers from:  
+- 🌊 **Inefficient water management**  
+- 🌱 **Limited plant & soil monitoring**  
+- 📉 **Low productivity & high resource wastage**  
+- ❌ **No integration of rainwater harvesting or climate resilience**  
 
-The system provides affordable, automated irrigation tailored to each crop’s needs using **soil moisture and environmental sensors**. It integrates a **rainwater harvesting unit with real-time water level monitoring**, ensuring efficient water use even during dry periods.  
-
-### Solution Highlights  
-- 🌱 **Soil moisture & temperature sensors** → monitor real-time field conditions.  
-- 📊 **Crop database** → determines optimal watering levels for each crop.  
-- 🔧 **Automated valve control** → managed by microcontrollers (Arduino/ESP32).  
-- 💧 **Rainwater harvesting with level sensors** → track stored water availability.  
-- 📱 **Mobile/Web dashboard** → allows farmers to monitor data and control irrigation remotely.  
-- 🔔 **Alerts & updates** → SMS or app notifications to keep farmers informed.  
+Farmers lack **real-time insights**, **remote control**, and **sustainability measures** to adapt to climate challenges.  
 
 ---
 
-## 🎯 Impact  
+## 💡 Solution & SDGs  
 
-- 🌍 **Conserves water** → reduces wastage through precision irrigation.  
-- 🌾 **Improves crop yields** → ensures crops get the right amount of water.  
-- 🤖 **Reduces manual labour** → minimizes dependency on constant field monitoring.  
-- 🌦️ **Adaptation to climate change** → resilient system for uncertain weather.  
-- 🔄 **Self-sustaining** → integrates renewable rainwater harvesting into irrigation.  
+**Agrivyaan is a Smart Agriculture System** integrating IoT, AI, and automation to optimize cultivation.  
+
+- **SDG 2 – Zero Hunger** → Improves yield & food security.  
+- **SDG 6 – Clean Water & Sanitation** → Reduces irrigation water wastage by up to 40%.  
+- **SDG 12 – Responsible Consumption** → Optimizes water use.  
+- **SDG 13 – Climate Action** → Enables sustainable farming.  
 
 ---
 
-## 📈 Conclusion  
+## 🔑 Key Features  
 
-**Prototype 2** enhances the basic water sprinkler idea into a **complete smart irrigation ecosystem** tailored for hilly regions like South Sikkim. By combining **IoT-based monitoring, rainwater harvesting, and crop intelligence**, AgroSmart empowers farmers to **increase productivity sustainably** while addressing **water scarcity challenges**.  
+- 🌱 **AI-driven Smart Farming**  
+- 📊 **Real-time monitoring & daily AI reports**  
+- 💧 **Precision irrigation using soil moisture sensors**  
+- ☁️ **Cloud & Offline Support**  
+- 📷 **Optional camera-based analysis for crop monitoring**  
+- 🔔 **Remote monitoring & alerts via mobile app**  
+- ♻️ **Rainwater harvesting with water-level monitoring**  
+
+---
+
+## ⚙️ System Functions  
+
+- **Soil Moisture & Temperature Monitoring**  
+- **AI-based Crop Intelligence** for irrigation recommendations  
+- **Automated Pump/Valve Control** (ESP32/Arduino)  
+- **Rainwater Harvesting Unit** with storage level sensors  
+- **Farmer Dashboard (Web/App)** for visualization and control  
+- **SMS/Push Alerts** for irrigation status & warnings  
+
+---
+
+## ✅ Advantages  
+
+- Conserves water (up to 40% reduction in wastage)  
+- Improves crop yield & resource efficiency  
+- Enables climate-resilient farming  
+- Reduces labour & manual effort  
+- Provides **real-time data-driven decisions**  
+
+---
+
+## ⚠️ Drawbacks of Existing Systems  
+
+- No AI-based analysis  
+- Fixed irrigation schedules  
+- No rainwater harvesting integration  
+- Limited offline/remote support  
+
+---
+
+## 🧪 Agrivyaan Levels  
+
+### **Level 1**  
+- ESP32 + Sensors (moisture, temperature, ultrasonic, PIR)  
+- Automated irrigation + monitoring  
+- Cloud connectivity with farmer alerts  
+
+### **Level 2**  
+- **AI Integration (Gemini AI/LLM)**  
+- Soil moisture readings processed via AI  
+- AI suggests irrigation quantity & method  
+- Automated system executes commands + notifies farmer  
+
+---
+
+## 📈 Future Market  
+
+- 🇮🇳 India needs **70% more food by 2050** (FAO).  
+- 🌊 Growing **water scarcity & sustainability demand**.  
+- 💰 Government subsidies & **AgriTech adoption programs**.  
+- 📈 Rising global demand for **precision farming solutions**.  
+
+---
+
+## 📌 Conclusion  
+
+**Prototype 2 (Agrivyaan)** transforms farming from **basic automation (Prototype 1)** into a **comprehensive AI + IoT ecosystem**. By combining:  
+
+- **IoT sensors**  
+- **AI-driven decision making**  
+- **Rainwater harvesting & water-level monitoring**  
+
+it enables farmers in regions like **South Sikkim** to **conserve water, increase productivity, and achieve sustainable agriculture**.  
 
 ---
